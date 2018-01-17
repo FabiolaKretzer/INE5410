@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<pnml>
+<net id="Net-One" type="P/T net">
+<token id="Default" enabled="true" red="0" green="0" blue="0"/>
+<place id="Fila de espera">
+<graphics>
+<position x="133.52941176470588" y="151.1764705882353"/>
+</graphics>
+<name>
+<value>Fila de espera</value>
+<graphics>
+<offset x="48.074866310160516" y="-8.235294117647054"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,0</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="lock=livre">
+<graphics>
+<position x="282.94117647058863" y="119.70588235294117"/>
+</graphics>
+<name>
+<value>lock=livre</value>
+<graphics>
+<offset x="41.22994652406416" y="-6.898395721925133"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,1</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="lock=ocupado">
+<graphics>
+<position x="282.9411764705881" y="163.82352941176472"/>
+</graphics>
+<name>
+<value>lock=ocupado</value>
+<graphics>
+<offset x="50.588235294117645" y="38.8770053475936"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,0</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="Região não crítica">
+<graphics>
+<position x="31.117647058823536" y="116.7058823529412"/>
+</graphics>
+<name>
+<value>Região não crítica</value>
+<graphics>
+<offset x="66.47058823529413" y="-8.823529411764698"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,5</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<transition id="entrar">
+<graphics>
+<position x="195.0" y="150.0"/>
+</graphics>
+<name>
+<value>entrar</value>
+<graphics>
+<offset x="32.058823529411804" y="38.52941176470588"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="lock">
+<graphics>
+<position x="74.41176470588235" y="150.58823529411762"/>
+</graphics>
+<name>
+<value>lock</value>
+<graphics>
+<offset x="26.76470588235294" y="38.52941176470586"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="unlock">
+<graphics>
+<position x="375.0" y="150.0"/>
+</graphics>
+<name>
+<value>unlock</value>
+<graphics>
+<offset x="31.470588235294134" y="39.70588235294118"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<arc id="entrar to lock=ocupado" source="entrar" target="lock=ocupado">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="211" y="167" curvePoint="false"/>
+<arcpath id="001" x="280" y="174" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="Fila de espera to entrar" source="Fila de espera" target="entrar">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="160" y="162" curvePoint="false"/>
+<arcpath id="001" x="201" y="162" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="lock=livre to entrar" source="lock=livre" target="entrar">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="280" y="135" curvePoint="false"/>
+<arcpath id="001" x="212" y="157" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="lock=ocupado to unlock" source="lock=ocupado" target="unlock">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="310" y="174" curvePoint="false"/>
+<arcpath id="001" x="381" y="167" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="lock to Fila de espera" source="lock" target="Fila de espera">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="91" y="162" curvePoint="false"/>
+<arcpath id="001" x="130" y="162" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="Região não crítica to lock" source="Região não crítica" target="lock">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="54" y="138" curvePoint="false"/>
+<arcpath id="001" x="81" y="163" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="unlock to lock=livre" source="unlock" target="lock=livre">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="382" y="157" curvePoint="false"/>
+<arcpath id="001" x="309" y="135" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="unlock to Região não crítica" source="unlock" target="Região não crítica">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="391" y="162" curvePoint="false"/>
+<arcpath id="001" x="420" y="199" curvePoint="true"/>
+<arcpath id="002" x="216" y="232" curvePoint="true"/>
+<arcpath id="003" x="58" y="180" curvePoint="true"/>
+<arcpath id="004" x="47" y="142" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+</net>
+</pnml>
